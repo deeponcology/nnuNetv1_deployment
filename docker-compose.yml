@@ -8,4 +8,10 @@ services:
             - ./input:/home/input
             - ./output:/home/output
             - ./nnUNet_results:/home/nnUNet/data/models
-        
+        deploy:
+          resources:
+            reservations:
+              devices:
+                - driver: nvidia
+                  count: 1
+                  capabilities: [gpu]
