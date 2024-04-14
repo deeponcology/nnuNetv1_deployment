@@ -9,10 +9,10 @@ services:
     volumes:
       - ./input:/home/input
       - ./output:/home/output
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    # deploy:
+    #   resources:
+    #   reservations:
+    #     generic_resources:
+    #       - discrete_resource_spec:
+    #         kind: 'NVIDIA-GPU'
+    #         value: 0
