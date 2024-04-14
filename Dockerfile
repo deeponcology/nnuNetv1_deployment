@@ -16,15 +16,14 @@ RUN mkdir /home/models
 # RUN wget  -O /home/models/Task055_SegTHOR.zip https://www.dropbox.com/s/m7es2ojn8h0ybhv/Task055_SegTHOR.zip?dl=0
 #-O $output_path $seg_model_url
 # RUN mkdir /home/models
-COPY  Task003_Liver.zip /home/models
-COPY pipeline.sh /home
-COPY predict.sh /home
+
 # COPY listdir.py /home
 COPY App.py /home
-COPY info.json /home
+
 RUN mkdir /home/templates
-COPY templates/upload.html /home/templates
-# Installing nnU-Net
+# COPY templates/upload.html /home/templates
+
+COPY templates/*.html /home/templates/
 RUN cd /home && \
   #mkdir /home/input && \
   #mkdir /home/output && \
@@ -47,11 +46,11 @@ RUN cd /home && \
   #pip3 install progress && \
   #pip3 install graphviz && \
   # nnUNet_download_pretrained_model Task003_Liver &&  \
-  nnUNet_install_pretrained_model_from_zip /home/models/Task003_Liver.zip   && \
+#   nnUNet_install_pretrained_model_from_zip /home/models/Task003_Liver.zip   && \
   cd /home
 RUN pip install flask_cors
-RUN chmod +x /home/pipeline.sh
-RUN chmod +x /home/predict.sh
+# RUN chmod +x /home/pipeline.sh
+# RUN chmod +x /home/predict.sh
 RUN cd /home
 WORKDIR /home
 ENV FLASK_APP=App.py
