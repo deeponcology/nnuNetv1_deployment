@@ -1,10 +1,21 @@
 version: '3'
+
+
 services:
-    nnuNetv1:
-        image: anilyerramasu/nnunetv1_models_2d_gpu
-        ports:
-            - 5000:5000
-        volumes:
+  nnuNetv1:
+    image: anilyerramasu/nnunetv1_models_2d_gpu
+    ports:
+      - 5000:5000
+    volumes:
+      - ./input:/home/input
+      - ./output:/home/output
+    deploy:
+      resources:
+        reservations:
+          - devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
             - ./input:/home/input
             - ./output:/home/output
             deploy:
