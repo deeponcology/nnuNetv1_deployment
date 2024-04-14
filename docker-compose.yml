@@ -9,7 +9,7 @@ services:
     volumes:
       - ./input:/home/input
       - ./output:/home/output
-      - $(pwd)/nnUNet_results:/home/nnUNet/data/models
+      - ./nnUNet_results:/home/nnUNet/data/models
     # deploy:
     #   resources:
     #   reservations:
