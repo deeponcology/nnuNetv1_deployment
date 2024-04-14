@@ -12,16 +12,7 @@ services:
     deploy:
       resources:
         reservations:
-          - devices:
+          devices:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-            - ./input:/home/input
-            - ./output:/home/output
-            deploy:
-              resources:
-                reservations:
-                  - devices:
-                      - driver: nvidia
-                        count: 1
-                        capabilities: [gpu]
