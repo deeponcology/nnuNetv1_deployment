@@ -75,9 +75,9 @@ def predict(path):
                 "nnUNet_predict", 
                 "-i", inputDir.name,
                 "-o", outDir.name,
-                "--task_name", path,
-                "--model", "2d",
-                "--disable_tta", ""]
+                "-t", path,
+                "-m", "2d",
+                "--disable_tta"]
                 )
                     
         return send_file(outDir.name +"/infile.nii.gz", mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
