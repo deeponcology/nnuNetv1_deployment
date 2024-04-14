@@ -1,6 +1,6 @@
 # Parent Image
-FROM nvcr.io/nvidia/pytorch:20.10-py3
-
+# FROM nvcr.io/nvidia/pytorch:20.10-py3
+FROM nvcr.io/nvidia/pytorch:22.04-py3
 # RUN apt-get update && apt-get upgrade -y
 # RUN apt-get install -y wget
 # RUN apt-get install -y unzip
@@ -28,7 +28,7 @@ RUN cd /home && \
   #mkdir /home/input && \
   #mkdir /home/output && \
   mkdir /home/nnUNet && \
-  pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113 && \
+#   pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113 && \
   pip install nnunet && \
   pip install flask && \
   #git clone https://github.com/MIC-DKFZ/nnUNet.git  && \
