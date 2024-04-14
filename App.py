@@ -46,7 +46,7 @@ def predict(path):
 
     print("inside ---",path)
     
-    os.mkdir(app.config['UPLOAD_FOLDER'])
+    # os.mkdir(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
 
         
