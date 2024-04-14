@@ -79,8 +79,9 @@ def predict(path):
                 "-m", "2d",
                 "--disable_tta"]
                 )
-                    
-        return send_file(outDir.name +"/infile.nii.gz", mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
+        files = os.listdir(outDir.name)
+        retFile = files[0]
+        return send_file(outDir.name +"/"+retFile, mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
        
  
 if __name__ == "__main__":
