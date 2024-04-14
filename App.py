@@ -37,15 +37,9 @@ def allowed_file(filename):
 
 
 
-@app.route('/')
-def home():
-  filename = 'info.json'
-#   os.path.join(app.static_folder, 'info.json')
-  message = ""
-  with open(filename) as info_file:
-        message = json.load(info_file)
-#   message = "Kidney and Kidney Tumor Segmentation Challenge." +" Segmentation targets kidney and kidney tumors," +"Input modalities are 0: abdominal CT scan.  \n"
-  return jsonify(message)
+@app.route('/<path:path>')
+def home(path):
+  return render_template(path)
 
 @app.route('/predict/<path:path>', methods=['POST'])
 def predict(path):
@@ -58,32 +52,34 @@ def predict(path):
         
         print("inside ---")
         files = request.files.getlist('files[]')
-        inputDir = tempfile.mkdtemp(dir="/home/input")
-        os.environ['inputDir'] = inputDir
-        outDir = tempfile.mkdtemp(dir="/home/output")
-        os.environ['outDir'] = outDir
+        inputDir = tempfile.TemporaryDirectory(dir="./input")
+        
+        outDir = tempfile.TemporaryDirectory(dir="./output")
+        
 
         for file in files:
             filename = secure_filename(file.filename)
             print(filename)
-            file.save(inputDir +"/" +filename)
+            file.save(inputDir.name +"/" +filename)
             
 
        
-        my = os.listdir(app.config['UPLOAD_FOLDER'])
-        print("input dir = ",my)
-        # nnUNet_predict -i $inputDir -o $outDir --task_name $1 --model 2d --disable_tta
-# 
-        # subprocess.check_output("/home/predict.sh", shell=True)
-        subprocess.check_output([
-            "nnUNet_predict", 
-            '-i', "Transaction 773 (printed version)",
-            "-o", "5",
-            "--task_name", path,
-            "--model", "2d",
-            "--disable_tta", ""])
+            my = os.listdir(app.config['UPLOAD_FOLDER'])
+            print("input dir = ",my)
+            # nnUNet_predict -i $inputDir -o $outDir --task_name $1 --model 2d --disable_tta
+        # 
+            # subprocess.check_output("/home/predict.sh", shell=True)
+            subprocess.check_output(
+                [
+                "nnUNet_predict", 
+                "-i", inputDir.name,
+                "-o", outDir.name,
+                "--task_name", path,
+                "--model", "2d",
+                "--disable_tta", ""]
+                )
                     
-        return send_file(outDir +"/infile.nii.gz", mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
+        return send_file(outDir.name +"/infile.nii.gz", mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
        
  
 if __name__ == "__main__":
