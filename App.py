@@ -55,7 +55,8 @@ def predict(path):
         inputDir = tempfile.TemporaryDirectory(dir="./input")
         
         outDir = tempfile.TemporaryDirectory(dir="./output")
-        
+        print(inputDir.name)
+        print(outDir.name)
 
         for file in files:
             filename = secure_filename(file.filename)
