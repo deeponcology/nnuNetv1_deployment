@@ -8,4 +8,4 @@ services:
             - ./input:/home/input
             - ./output:/home/output
             - ./nnUNet_results:/home/nnUNet/data/models
-        runtime: nvidia
+        
