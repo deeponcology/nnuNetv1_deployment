@@ -4,6 +4,7 @@ version: '3.3'
 services:
   nnuNetv1:
     image: anilyerramasu/nnunetv1_models_2d_gpu
+    command: nvidia-smi
     ports:
       - 6000:5000
     volumes:
