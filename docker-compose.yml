@@ -12,8 +12,8 @@ services:
       - ./nnUNet_results:/home/nnUNet/data/models
     deploy:
       resources:
-      reservations:
-        generic_resources:
-          - discrete_resource_spec:
-            kind: 'NVIDIA-GPU'
-            value: 0
+        reservations:
+          generic_resources:
+            - discrete_resource_spec:
+              kind: 'NVIDIA-GPU'
+              value: 0
