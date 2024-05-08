@@ -79,8 +79,15 @@ def predict(path):
                 "-m", "2d",
                 "--disable_tta"]
                 )
-        files = os.listdir(outDir.name)
-        retFile = files[0]
+        directory_path = outDir.name
+
+# List all files in the directory and filter for files ending with '.nii.gz'
+        files_with_extension = [f for f in os.listdir(directory_path) if f.endswith('.nii.gz')]
+
+        print(files_with_extension)     
+
+        # files = os.listdir(outDir.name)
+        retFile = files_with_extension[0]
         return send_file(outDir.name +"/"+retFile, mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
        
  

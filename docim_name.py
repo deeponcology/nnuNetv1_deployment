@@ -14,5 +14,5 @@ def add_dcm_extension(directory):
             print(f'Renamed {file_path} to {new_file_path}')
 
 # Replace 'path_to_your_directory' with the path to the directory containing your DICOM files
-directory_path = '/Volumes/AI-Data/TCIA/LiverTumor/vip/3Dircadb1/3Dircadb1.8/PATIENT_DICOM'
+directory_path = '/Volumes/AI-Data/TCIA/LiverTumor/icad/3Dircadb1/3Dircadb1.2/PATIENT_DICOM'
 add_dcm_extension(directory_path)
