@@ -1,17 +1,11 @@
 # Parent Image
 # FROM nvcr.io/nvidia/pytorch:20.10-py3
-FROM nvcr.io/nvidia/pytorch:22.04-py3
-# RUN apt-get update && apt-get upgrade -y
-# RUN apt-get install -y wget
-# RUN apt-get install -y unzip
-# RUN pip3 install virtualenv 
-# COPY env/ /env/
-# RUN  source /env/bin/activate
+FROM nvcr.io/nvidia/pytorch:23.05-py3
+
 ENV nnUNet_raw_data_base "/home/nnUNet/data/nnUNet_raw_data_base"
 ENV nnUNet_preprocessed "/home/nnUNet/data/nnUNet_preprocessed"
-ENV RESULTS_FOLDER "/home/nnUNet/data/models"
-ENV seg_model_url  "https://www.dropbox.com/s/m7es2ojn8h0ybhv/Task055_SegTHOR.zip?dl=0"
-ENV output_path  "/home/models/Task002_Heart.zip"
+ENV nnUNet_results "/home/nnUNet/data/models"
+
 RUN mkdir /home/models
 # RUN wget  -O /home/models/Task055_SegTHOR.zip https://www.dropbox.com/s/m7es2ojn8h0ybhv/Task055_SegTHOR.zip?dl=0
 #-O $output_path $seg_model_url
@@ -30,7 +24,7 @@ RUN cd /home && \
   mkdir /home/nnUNet && \
 #   pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113 && \
   # pip install nnunet && \
-  pip install TotalSegmentator==1.5.7 && \
+  pip install nnunetv2 && \
   pip install flask && \
   #git clone https://github.com/MIC-DKFZ/nnUNet.git  && \
   mkdir /home/nnUNet/input && \
