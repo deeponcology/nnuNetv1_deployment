@@ -5,7 +5,7 @@ FROM nvcr.io/nvidia/pytorch:23.05-py3
 ENV nnUNet_raw_data_base "/home/nnUNet/data/nnUNet_raw_data_base"
 ENV nnUNet_preprocessed "/home/nnUNet/data/nnUNet_preprocessed"
 ENV nnUNet_results "/home/nnUNet/data/models"
-
+ENV RESULTS_FOLDER "/home/nnUNet/data/modelsv1"
 RUN mkdir /home/models
 # RUN wget  -O /home/models/Task055_SegTHOR.zip https://www.dropbox.com/s/m7es2ojn8h0ybhv/Task055_SegTHOR.zip?dl=0
 #-O $output_path $seg_model_url
@@ -33,6 +33,7 @@ RUN cd /home && \
   mkdir /home/nnUNet/output && \
   mkdir /home/nnUNet/data && \
   mkdir /home/nnUNet/data/models && \
+  mkdir /home/nnUNet/data/modelsv1 && \
   mkdir /home/nnUNet/data/nnUNet_raw_data_base && \
   mkdir /home/nnUNet/data/nnUNet_preprocessed && \
   cd /home/nnUNet && \
