@@ -76,7 +76,7 @@ def predictv2(path):
                 "-i", inputDir.name,
                 "-o", outDir.name,
                 "-f", "0",
-                "-d":path,
+                "-d",path,
                 "-c", "3d_fullres",
                 "--disable_tta",
                 "--disable_progress_bar"]
