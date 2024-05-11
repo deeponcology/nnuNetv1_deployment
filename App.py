@@ -78,6 +78,8 @@ def predictv2(path):
                 "-f", "0",
                 "-d",path,
                 "-c", "3d_fullres",
+                "-tr", "nnUNetTrainer",
+                "-p" "nnUNetPlans",
                 "--disable_tta",
                 "--disable_progress_bar"]
                 )
