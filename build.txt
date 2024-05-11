@@ -1,6 +1,9 @@
 docker build --no-cache -t anilyerramasu/nnunetv1_models_2d_gpu .
 docker run --gpus all   -d  --ipc=host --rm -p 5000:5000 -v $(pwd)/input:/home/input -v $(pwd)/output:/home/output -v $(pwd)/nnUNet_results:/home/nnUNet/data/models anilyerramasu/nnunetv1_models_2d_gpu 
 
+docker build --no-cache -t anilyerramasu/nnunetv2_models_3d_gpu .
+docker run --gpus all   -d  --ipc=host --rm -p 5000:5000 -v $(pwd)/input:/home/input -v $(pwd)/output:/home/output -v $(pwd)/nnUNet_results:/home/nnUNet/data/models anilyerramasu/nnunetv2_models_3d_gpu 
+
 
 
 docker build --no-cache -t anilyerramasu/nnunetv1_models_3d_gpu .
