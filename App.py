@@ -70,17 +70,19 @@ def predictv2(path):
             # nnUNet_predict -i $inputDir -o $outDir --task_name $1 --model 2d --disable_tta
         # nnUNetv2_predict -d Dataset219_AMOS2022_postChallenge_task2 -i ./input/ -o ./output/ -f  0 -tr nnUNetTrainer -c 3d_fullres
             # subprocess.check_output("/home/predict.sh", shell=True)
-            subprocess.check_output(
+            o_put = subprocess.check_output(
                 [
                 "nnUNetv2_predict", 
                 "-i", inputDir.name,
                 "-o", outDir.name,
                 "-f", "0",
-                "-d", "3d_fullres",
+                "-d":path,
+                "-c", "3d_fullres",
                 "--disable_tta",
                 "--disable_progress_bar"]
                 )
         directory_path = outDir.name
+        print(o_put)
 
 # List all files in the directory and filter for files ending with '.nii.gz'
         files_with_extension = [f for f in os.listdir(directory_path) if f.endswith('.nii.gz')]
@@ -121,7 +123,7 @@ def predict(path):
             # nnUNet_predict -i $inputDir -o $outDir --task_name $1 --model 2d --disable_tta
         # 
             # subprocess.check_output("/home/predict.sh", shell=True)
-            subprocess.check_output(
+            o_put = subprocess.check_output(
                 [
                 "nnUNet_predict", 
                 "-i", inputDir.name,
@@ -131,6 +133,7 @@ def predict(path):
                 "--disable_tta"]
                 )
         directory_path = outDir.name
+        print(o_put)
 
 # List all files in the directory and filter for files ending with '.nii.gz'
         files_with_extension = [f for f in os.listdir(directory_path) if f.endswith('.nii.gz')]
