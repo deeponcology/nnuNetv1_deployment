@@ -24,7 +24,7 @@ RUN cd /home && \
   mkdir /home/nnUNet && \
 #   pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113 && \
   # pip install nnunet && \
-  pip install nnunetv2 && \
+  pip install nnunetv2==2.2.1 && \
   pip install nnunet && \
   pip install flask && \
   #git clone https://github.com/MIC-DKFZ/nnUNet.git  && \
