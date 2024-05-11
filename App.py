@@ -80,8 +80,7 @@ def predictv2(path):
                 "-c", "3d_fullres",
                 "-tr", "nnUNetTrainer",
                 "-p" "nnUNetPlans",
-                "--disable_tta",
-                "--disable_progress_bar"]
+                "--disable_tta"]
                 )
         directory_path = outDir.name
         print(o_put)
