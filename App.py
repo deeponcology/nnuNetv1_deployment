@@ -130,7 +130,7 @@ def predict(path):
                 "-i", inputDir.name,
                 "-o", outDir.name,
                 "-t", path,
-                "-m", "2d",
+                "-m", "3d_fullres",
                 "--disable_tta"]
                 )
         directory_path = outDir.name
