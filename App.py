@@ -95,7 +95,7 @@ def predictv2(path):
         return send_file(outDir.name +"/"+retFile, mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
 
 @app.route('/predict/ich', methods=['POST'])
-def predict_ich(path):
+def predict_ich():
 
     
     
