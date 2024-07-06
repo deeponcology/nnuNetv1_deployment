@@ -130,12 +130,11 @@ def predict_ich():
                 "-o", outDir.name,
                 "-f", "0",
                 "-d","911",
-                "-c", "3d_fullres",
-                "-tr", "nnUNetTrainer",
-                "-p" "nnUNetPlans"]
+                "-c", "3d_fullres"]
                 )
+            print(o_put)
         directory_path = outDir.name
-        print(o_put)
+        
 
 # List all files in the directory and filter for files ending with '.nii.gz'
         files_with_extension = [f for f in os.listdir(directory_path) if f.endswith('.nii.gz')]
