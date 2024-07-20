@@ -8,7 +8,7 @@ import shutil
 import tempfile
 from flask import jsonify, send_file
 from flask_cors import CORS
-
+import Pancreas as Pancreas
 app=Flask(__name__)
 CORS(app)
 
@@ -40,6 +40,36 @@ def allowed_file(filename):
 @app.route('/<path:path>')
 def home(path):
   return render_template(path)
+
+@app.route('/pancreas/predict', methods=['POST'])
+def predict_pancreas():
+    
+        if request.method == 'POST':
+    
+            files = request.files.getlist('files[]')
+            inputDir = tempfile.TemporaryDirectory(dir="./input")
+            
+            outDir = tempfile.TemporaryDirectory(dir="./output")
+            print(inputDir.name)
+            print(outDir.name)
+    
+            for file in files:
+                filename = secure_filename(file.filename)
+                print(filename)
+                file.save(inputDir.name +"/" +filename)
+                my = os.listdir(app.config['UPLOAD_FOLDER'])
+                print("input dir = ",my)
+            
+            Pancreas.process(inputDir.name, outDir.name)
+    # List all files in the directory and filter for files ending with '.nii.gz'
+            files_with_extension = [f for f in os.listdir(directory_path) if f.endswith('.nii.gz')]
+
+            print(files_with_extension)
+
+            # files = os.listdir(outDir.name)
+            retFile = files_with_extension[0]
+            return send_file(outDir.name +"/"+retFile, mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
+        
 
 @app.route('/predict/v2/<path:path>', methods=['POST'])
 def predictv2(path):

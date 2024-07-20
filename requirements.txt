@@ -1,0 +1,5 @@
+nnunetv2==2.2.1
+nnunet
+flask
+flask-cors
+gunicorn

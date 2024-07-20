@@ -13,6 +13,8 @@ RUN mkdir /home/models
 
 # COPY listdir.py /home
 COPY App.py /home
+COPY data_utils.py /home
+COPY Pancreas.py /home
 
 RUN mkdir /home/templates
 # COPY templates/upload.html /home/templates
@@ -37,14 +39,11 @@ RUN cd /home && \
   mkdir /home/nnUNet/data/nnUNet_raw_data_base && \
   mkdir /home/nnUNet/data/nnUNet_preprocessed && \
   cd /home/nnUNet && \
-  # pip install -e . && \
-  #pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113 && \
-  #pip install -e . && \
-  #pip3 install progress && \
-  #pip3 install graphviz && \
-  # nnUNet_download_pretrained_model Task003_Liver &&  \
-#   nnUNet_install_pretrained_model_from_zip /home/models/Task003_Liver.zip   && \
   cd /home
+
+RUN SITE_PKG=`pip3 show nnunet | grep "Location:" | awk '{print $2}'` && \
+   cp nnUNetTrainerV2_Loss_CE_checkpoints.py "$SITE_PKG/nnunet/training/network_training/nnUNetTrainerV2_Loss_CE_checkpoints.py"
+
 RUN pip install flask_cors
 # RUN chmod +x /home/pipeline.sh
 # RUN chmod +x /home/predict.sh
