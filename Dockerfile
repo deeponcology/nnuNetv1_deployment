@@ -29,7 +29,8 @@ RUN cd /home && \
   pip install nnunetv2==2.2.1 && \
   pip install nnunet && \
   pip install flask && \
-  pip install git+https://github.com/biomedia-mira/blast-ct.git && \
+  pip install git+https://github.com/radreports/blast-ct-vip.git && \
+  
   pip install tensorboard && \
   #git clone https://github.com/MIC-DKFZ/nnUNet.git  && \
   mkdir /home/nnUNet/input && \
