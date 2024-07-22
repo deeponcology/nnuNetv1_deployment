@@ -65,7 +65,7 @@ def ich_infer():
     output_path = outDir.name+ '/output.nii.gz'
 
     # Execute the command-line tool
-    command = ['blast-ct', '--input', input_path, '--output', output_path]
+    command = ['blast-ct', '--input', input_path, '--output', output_path,'--device','0','--ensemble','True']
     try:
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
