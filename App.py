@@ -62,7 +62,7 @@ def ich_infer():
     file.save(inputDir.name +"/" +file.filename)
 
     # Generate unique output path
-    output_path = os.path.join(outDir, 'output.nii.gz')
+    output_path = outDir+ '/output.nii.gz'
 
     # Execute the command-line tool
     command = ['blast-ct', '--input', input_path, '--output', output_path]
