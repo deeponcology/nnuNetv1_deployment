@@ -45,19 +45,24 @@ def home(path):
 
 @app.route('/ich/infer', methods=['POST'])
 def ich_infer():
+    inputDir = tempfile.TemporaryDirectory(dir="./input")
+    outDir = tempfile.TemporaryDirectory(dir="./output")
+    
     # Save uploaded file
     file = request.files['file']
-    file_extension = os.path.splitext(file.filename)[1]
-    print("file_extension: ", file_extension)
-    print("Input file is: ", file)
+    # file_extension = os.path.splitext(file.filename)[1]
+    # print("file_extension: ", file_extension)
+    # print("Input file is: ", file)
     # if file_extension not in ['.nii', '.nii.gz']:
     #     return "Invalid file format. Please upload a .nii or .nii.gz file.", 400
 
-    input_path = os.path.join('/tmp', str(uuid.uuid4()) + ".nii.gz")
-    file.save(input_path)
+    # input_path = os.path.join(inputDir, str(uuid.uuid4()) + ".nii.gz")
+    # file.save(input_path)
+    input_path = inputDir.name +"/" +file.filename
+    file.save(inputDir.name +"/" +file.filename)
 
     # Generate unique output path
-    output_path = os.path.join('/tmp', str(uuid.uuid4()) + '_output.nii.gz')
+    output_path = os.path.join(outDir, 'output.nii.gz')
 
     # Execute the command-line tool
     command = ['blast-ct', '--input', input_path, '--output', output_path]
@@ -65,7 +70,7 @@ def ich_infer():
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
         return f"Error during inference: {e}", 500
-
+    return send_file(output_path, as_attachment=True)
 
 @app.route('/pancreas/predict', methods=['POST'])
 def predict_pancreas():
