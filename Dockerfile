@@ -44,8 +44,8 @@ RUN cd /home && \
   cd /home/nnUNet && \
   cd /home
 
-RUN SITE_PKG=`pip3 show nnunet | grep "Location:" | awk '{print $2}'` && \
-   cp nnUNetTrainerV2_Loss_CE_checkpoints.py "$SITE_PKG/nnunet/training/network_training/nnUNetTrainerV2_Loss_CE_checkpoints.py"
+# RUN SITE_PKG=`pip3 show nnunet | grep "Location:" | awk '{print $2}'` && \
+#    cp nnUNetTrainerV2_Loss_CE_checkpoints.py "$SITE_PKG/nnunet/training/network_training/nnUNetTrainerV2_Loss_CE_checkpoints.py"
 
 RUN pip install flask_cors
 # RUN chmod +x /home/pipeline.sh
