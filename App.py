@@ -9,6 +9,8 @@ import tempfile
 from flask import jsonify, send_file
 from flask_cors import CORS
 import Pancreas as Pancreas
+import uuid
+
 app=Flask(__name__)
 CORS(app)
 
@@ -40,6 +42,30 @@ def allowed_file(filename):
 @app.route('/<path:path>')
 def home(path):
   return render_template(path)
+
+@app.route('/ich/infer', methods=['POST'])
+def ich_infer():
+    # Save uploaded file
+    file = request.files['file']
+    file_extension = os.path.splitext(file.filename)[1]
+    print("file_extension: ", file_extension)
+    print("Input file is: ", file)
+    # if file_extension not in ['.nii', '.nii.gz']:
+    #     return "Invalid file format. Please upload a .nii or .nii.gz file.", 400
+
+    input_path = os.path.join('/tmp', str(uuid.uuid4()) + ".nii.gz")
+    file.save(input_path)
+
+    # Generate unique output path
+    output_path = os.path.join('/tmp', str(uuid.uuid4()) + '_output.nii.gz')
+
+    # Execute the command-line tool
+    command = ['blast-ct', '--input', input_path, '--output', output_path]
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError as e:
+        return f"Error during inference: {e}", 500
+
 
 @app.route('/pancreas/predict', methods=['POST'])
 def predict_pancreas():
