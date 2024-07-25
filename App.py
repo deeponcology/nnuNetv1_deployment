@@ -178,6 +178,7 @@ def predicttotalseg(path):
             file.save(inputDir.name +"/" +filename)
             
             my = os.listdir(app.config['UPLOAD_FOLDER'])
+            print("installed models are  = ",os.listdir("/home/nnUNet/data/models/"))
             print("input dir = ",my)
             # nnUNet_predict -i $inputDir -o $outDir --task_name $1 --model 2d --disable_tta
         # nnUNetv2_predict -d Dataset219_AMOS2022_postChallenge_task2 -i ./input/ -o ./output/ -f  0 -tr nnUNetTrainer -c 3d_fullres
@@ -190,8 +191,8 @@ def predicttotalseg(path):
                 "-f", "0",
                 "-d",path,
                 "-c", "3d_fullres",
-                "-tr", "nnUNetTrainerNoMirroring",
-                # "-tr", "nnUNetTrainer_DASegOrd0_NoMirroring",
+                # "-tr", "nnUNetTrainerNoMirroring",
+                "-tr", "nnUNetTrainer_DASegOrd0_NoMirroring",
                 "-p" "nnUNetPlans",
                 "--disable_tta"]
                 )
