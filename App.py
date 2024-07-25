@@ -200,8 +200,8 @@ def predicttotalseg(path):
             o_put = subprocess.check_output(
                 [
                 "TotalSegmentator", 
-                "-i", inputDir.name ,
-                "-o", outDir.name,
+                "-i", inputDir.name +"/" +filename ,
+                "-o", outDir.name + "/predicions.nii.gz",
                 "--task",path,
                 # "--fast",
                 
