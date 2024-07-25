@@ -190,7 +190,8 @@ def predicttotalseg(path):
                 "-f", "0",
                 "-d",path,
                 "-c", "3d_fullres",
-                "-tr", "nnUNetTrainer_DASegOrd0_NoMirroring",
+                "-tr", "nnUNetTrainerNoMirroring",
+                # "-tr", "nnUNetTrainer_DASegOrd0_NoMirroring",
                 "-p" "nnUNetPlans",
                 "--disable_tta"]
                 )

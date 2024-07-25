@@ -32,6 +32,10 @@ RUN mkdir -p /home/nnUNet && \
     mkdir -p /home/nnUNet/data/nnUNet_preprocessed
 
 RUN pip install flask_cors
+ENV nnUNet_raw_data_base "/home/nnUNet/data/nnUNet_raw_data_base"
+ENV nnUNet_preprocessed "/home/nnUNet/data/nnUNet_preprocessed"
+ENV nnUNet_results "/home/nnUNet/data/models"
+ENV RESULTS_FOLDER "/home/nnUNet/data/modelsv1"
 
 WORKDIR /home
 ENV FLASK_APP=App.py
