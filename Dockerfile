@@ -17,7 +17,7 @@ RUN mkdir -p /home/templates
 COPY templates/*.html /home/templates/
 
 RUN mkdir -p /home/nnUNet && \
-    # pip install nnunetv2==2.2.1 && \
+    pip install nnunetv2==2.2.1 && \
     pip install TotalSegmentator && \
     pip install nnunet && \
     pip install flask && \
