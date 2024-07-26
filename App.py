@@ -183,30 +183,30 @@ def predicttotalseg(path):
             # nnUNet_predict -i $inputDir -o $outDir --task_name $1 --model 2d --disable_tta
         # nnUNetv2_predict -d Dataset219_AMOS2022_postChallenge_task2 -i ./input/ -o ./output/ -f  0 -tr nnUNetTrainer -c 3d_fullres
             # subprocess.check_output("/home/predict.sh", shell=True)
-            # o_put = subprocess.check_output(
-            #     [
-            #     "nnUNetv2_predict", 
-            #     "-i", inputDir.name,
-            #     "-o", outDir.name,
-            #     "-f", "0",
-            #     "-d",path,
-            #     "-c", "3d_fullres",
-            #     # "-tr", "nnUNetTrainerNoMirroring",
-            #     "-tr", "nnUNetTrainer_DASegOrd0_NoMirroring",
-            #     "-p" "nnUNetPlans",
-            #     "--disable_tta"]
-            #     )
-            
             o_put = subprocess.check_output(
                 [
-                "TotalSegmentator", 
-                "-i", inputDir.name +"/" +filename ,
-                "-o", outDir.name + "/predicions.nii.gz",
-                "--task",path,
-                # "--fast",
-                
-                "--ml"]
+                "nnUNetv2_predict", 
+                "-i", inputDir.name,
+                "-o", outDir.name,
+                "-f", "0",
+                "-d",path,
+                "-c", "3d_fullres",
+                # "-tr", "nnUNetTrainerNoMirroring",
+                "-tr", "nnUNetTrainer_DASegOrd0_NoMirroring",
+                "-p" "nnUNetPlans",
+                "--disable_tta"]
                 )
+            
+            # o_put = subprocess.check_output(
+            #     [
+            #     "TotalSegmentator", 
+            #     "-i", inputDir.name +"/" +filename ,
+            #     "-o", outDir.name + "/predicions.nii.gz",
+            #     "--task",path,
+            #     # "--fast",
+                
+            #     "--ml"]
+            #     )
         directory_path = outDir.name
         print(o_put)
 
