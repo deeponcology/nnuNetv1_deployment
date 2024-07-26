@@ -190,7 +190,7 @@ def predicttotalseg(path):
                 "-o", outDir.name,
                 "-f", "0",
                 "-d",path,
-                "-c", "3d_fullres",
+                "-c", "3d_fullres_high",
                 # "-tr", "nnUNetTrainerNoMirroring",
                 "-tr", "nnUNetTrainer_DASegOrd0_NoMirroring",
                 "-p" "nnUNetPlans",
