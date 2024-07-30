@@ -11,7 +11,7 @@ RUN pip install --upgrade pip
 # RUN pip pyradiomics
 
 COPY . /app
-RUN pip install /app
+# RUN pip install /app
 RUN pip install flask flask_cors
 RUN pip install git+https://github.com/wasserth/TotalSegmentator.git
 # RUN python /app/totalsegmentator/download_pretrained_weights.py
