@@ -59,12 +59,9 @@ def home(path):
 @app.route('/predict/totalseg/<path:path>', methods=['POST'])
 def predict(path):
 
-    
-    
     # os.mkdir(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
 
-        
         print("inside ---")
         files = request.files.getlist('files[]')
         inputDir = tempfile.TemporaryDirectory(dir="./input")

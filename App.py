@@ -157,10 +157,8 @@ def predictv2(path):
 
 
 @app.route('/predict/totalseg/<path:path>', methods=['POST'])
-def predicttotalseg(path):
+def predict_totalseg(path):
 
-    print("inside ---",path)
-    
     # os.mkdir(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
 
@@ -177,48 +175,29 @@ def predicttotalseg(path):
             print(filename)
             file.save(inputDir.name +"/" +filename)
             
+
+       
             my = os.listdir(app.config['UPLOAD_FOLDER'])
-            print("installed models are  = ",os.listdir("/home/nnUNet/data/models/"))
             print("input dir = ",my)
             # nnUNet_predict -i $inputDir -o $outDir --task_name $1 --model 2d --disable_tta
-        # nnUNetv2_predict -d Dataset219_AMOS2022_postChallenge_task2 -i ./input/ -o ./output/ -f  0 -tr nnUNetTrainer -c 3d_fullres
+        # 
             # subprocess.check_output("/home/predict.sh", shell=True)
-            o_put = subprocess.check_output(
+            subprocess.check_output(
                 [
-                "nnUNetv2_predict", 
-                "-i", inputDir.name,
-                "-o", outDir.name,
-                "-f", "0",
-                "-d",path,
-                "-c", "3d_fullres_high",
-                # "-tr", "nnUNetTrainerNoMirroring",
-                "-tr", "nnUNetTrainer_DASegOrd0_NoMirroring",
-                "-p" "nnUNetPlans",
-                "--disable_tta"]
+                "TotalSegmentator", 
+                "-i", inputDir.name +"/" +filename,
+                "-o", outDir.name+"/" +"output.nii.gz",
+                # "--fast",
+                "--task",path,
+                "--ml"]
                 )
-            
-            # o_put = subprocess.check_output(
-            #     [
-            #     "TotalSegmentator", 
-            #     "-i", inputDir.name +"/" +filename ,
-            #     "-o", outDir.name + "/predicions.nii.gz",
-            #     "--task",path,
-            #     # "--fast",
-                
-            #     "--ml"]
-            #     )
-        directory_path = outDir.name
-        print(o_put)
-
-# List all files in the directory and filter for files ending with '.nii.gz'
-        files_with_extension = [f for f in os.listdir(directory_path) if f.endswith('.nii.gz')]
-
-        print(files_with_extension)     
-
-        # files = os.listdir(outDir.name)
-        retFile = files_with_extension[0]
-        return send_file(outDir.name +"/"+retFile, mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
-
+        files = os.listdir(outDir.name)
+        # retFile = files[0]
+        print("output files",files)
+        retFile = files
+        return send_file(outDir.name+"/" +"output.nii.gz", mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
+       
+ 
 @app.route('/predict/ich', methods=['POST'])
 def predict_ich():
 
