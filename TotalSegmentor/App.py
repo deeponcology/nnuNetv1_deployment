@@ -49,7 +49,7 @@ def get_home():
         home_path = Path("/tmp") if str(Path.home()) == "/" else Path.home()
         totalseg_dir = home_path / ".totalsegmentator"
     # return totalseg_dir
-    return jsonify({"message": totalseg_dir})
+    return jsonify({"message": str(totalseg_dir)})
 
 
 @app.route('/<path:path>')
