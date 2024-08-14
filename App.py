@@ -133,7 +133,7 @@ def predict_stroke():
                 "-i", inputDir.name,
                 "-o", outDir.name,
                 "-f", "all",
-                "-d","9111",
+                "-d","9112",
                 "-c", "3d_fullres",
                 "-tr", "nnUNetTrainer",
                 "-p" "nnUNetPlans",
