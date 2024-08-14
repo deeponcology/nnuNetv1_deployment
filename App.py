@@ -102,6 +102,56 @@ def predict_pancreas():
             return send_file(outDir.name +"/"+retFile, mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
         
 
+@app.route('/predict/stroke', methods=['POST'])
+def predict_stroke():
+
+    # os.mkdir(app.config['UPLOAD_FOLDER'])
+    if request.method == 'POST':
+        print("inside ---")
+        files = request.files.getlist('files[]')
+        inputDir = tempfile.TemporaryDirectory(dir="./input")
+        
+        outDir = tempfile.TemporaryDirectory(dir="./output")
+        print(inputDir.name)
+        print(outDir.name)
+
+        for file in files:
+            filename = secure_filename(file.filename)
+            print(filename)
+            file.save(inputDir.name +"/" +filename)
+            
+
+       
+            my = os.listdir(app.config['UPLOAD_FOLDER'])
+            print("input dir = ",my)
+            # nnUNet_predict -i $inputDir -o $outDir --task_name $1 --model 2d --disable_tta
+        # nnUNetv2_predict -d Dataset219_AMOS2022_postChallenge_task2 -i ./input/ -o ./output/ -f  0 -tr nnUNetTrainer -c 3d_fullres
+            # subprocess.check_output("/home/predict.sh", shell=True)
+            o_put = subprocess.check_output(
+                [
+                "nnUNetv2_predict", 
+                "-i", inputDir.name,
+                "-o", outDir.name,
+                "-f", "all",
+                "-d","9111",
+                "-c", "3d_fullres",
+                "-tr", "nnUNetTrainer",
+                "-p" "nnUNetPlans",
+                "--disable_tta"]
+                )
+        directory_path = outDir.name
+        print(o_put)
+
+# List all files in the directory and filter for files ending with '.nii.gz'
+        files_with_extension = [f for f in os.listdir(directory_path) if f.endswith('.nii.gz')]
+
+        print(files_with_extension)     
+
+        # files = os.listdir(outDir.name)
+        retFile = files_with_extension[0]
+        return send_file(outDir.name +"/"+retFile, mimetype="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip")
+
+
 @app.route('/predict/v2/<path:path>', methods=['POST'])
 def predictv2(path):
 
