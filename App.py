@@ -134,9 +134,9 @@ def predict_stroke():
                 "-o", outDir.name,
                 "-f", "all",
                 "-d","9112",
-                "-c", "3d_fullres",
+                "-c", "2d",
                 "-tr", "nnUNetTrainer",
-                "-p" "nnUNetPlans",
+                "-p", "nnUNetPlans",
                 "--disable_tta"]
                 )
         directory_path = outDir.name
